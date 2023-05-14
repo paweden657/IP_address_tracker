@@ -1,0 +1,18 @@
+:root {
+    --clr-very-dark-gray: hsl(0, 0%, 17%);
+    --clr-dark-gray: hsl(0, 0%, 59%);
+
+    --ff: 'Rubik', sans-serif;
+
+    --fs: 18px;
+
+    --fw-400: 400;
+    --fw-500: 500;
+    --fw-700: 700;
+}
+body,html {
+    width: 100%;
+    min-width: 375px;
+
+    margin: 0;
+}
