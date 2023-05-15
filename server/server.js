@@ -14,24 +14,21 @@ app.get('/', (req, res) => {
     try {
         let IpAddress = req.query.param;
         if(ip.Address6.isValid(IpAddress) || ip.Address4.isValid(IpAddress)) {
-          console.log("Ip address is valid");
-          //const apiKey = process.env.API_KEY;
-  
-          //const response = await axios.get("https://geo.ipify.org/api/v2/country,city?apiKey=" + apiKey + "&ipAddress=" + IpAddress);
-
-          //const data = response.data;
-
-          console.log(IpAddress);
-          res.send('{"Answer":"Address is valid"}');
+          const apiKey = process.env.API_KEY;
+          axios.get("https://geo.ipify.org/api/v2/country?apiKey=" + apiKey + "&ipAddress=" + IpAddress)
+          .then(response => {
+            res.send(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+            res.status(500).send('{"500":"Internal Server Error"}');
+          });
         } else {
-          console.log("Ip address is not valid");
-          console.log(IpAddress);
-          res.send('{"Answer":"Adres is not valid"}');
+          res.status(400).send('{"400":"Bad Request"}');
         }
-
     } catch (error) {
       console.error(error);
-      res.status(500).send('error occured');
+      res.status(500).send('{"500":"Internal Server Error"}');
     }
   });
 

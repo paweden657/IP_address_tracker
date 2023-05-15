@@ -9,18 +9,23 @@ form.addEventListener("submit", function(event) {
   event.preventDefault();
   const IpAddress = input.value;
 
-
   fetch(`${url}?param=${encodeURIComponent(IpAddress)}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if(data.Answer === "Address is valid") {
-          notValidIp.classList.add("hide");
-        } else {
+    .then(response => {
+      if(response.ok) {
+        return response.json();
+      } else {
+        if(response.status === 400) {
           notValidIp.classList.remove("hide");
         }
+        throw new Error("Error occured:" + response.status);
+      }
+    })
+    .then(data => {
+        console.clear();
+        console.log(data);
+        notValidIp.classList.add("hide");
     })
     .catch(error => {
-      console.error('error occured', error);
+      console.error('Error occured', error);
     });
 })
