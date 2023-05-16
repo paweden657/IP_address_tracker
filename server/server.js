@@ -13,7 +13,7 @@ app.use(cors());
 app.get('/', (req, res) => {
     try {
         let IpAddress = req.query.param;
-        if(ip.Address6.isValid(IpAddress) || ip.Address4.isValid(IpAddress)) {
+        if(ip.Address4.isValid(IpAddress) || ip.Address6.isValid(IpAddress)) {
           const apiKey = process.env.API_KEY;
           axios.get("https://geo.ipify.org/api/v2/country?apiKey=" + apiKey + "&ipAddress=" + IpAddress)
           .then(response => {
