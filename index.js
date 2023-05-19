@@ -29,3 +29,10 @@ form.addEventListener("submit", function(event) {
       console.error('Error occured', error);
     });
 })
+
+let map = L.map("map").setView([51.505, -0.09], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; OpenStreetMap contributors'
+}).addTo(map);
+
+let marker = L.marker([51.5, -0.09]).addTo(map);
