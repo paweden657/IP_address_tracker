@@ -60,6 +60,8 @@ input {
     border-width: 0;
 
     padding-left: 25px;
+
+    cursor: pointer;
 }
 input::placeholder {
     color: var(--clr-dark-gray);
@@ -72,7 +74,7 @@ input:focus {
 input:focus::placeholder {
     color: transparent;
 }
-button {
+#btn {
     width: 20%;
 
     background-color: black;
@@ -87,6 +89,9 @@ button {
     align-items: center;
 
     cursor: pointer;
+}
+#btn:hover {
+    background-color: var(--clr-very-dark-gray);
 }
 #result {
     position: absolute;
@@ -187,12 +192,16 @@ ul {
     background-color: white;
 
     border-radius: 0;
+    border-width: 0; 
 
     box-shadow: 0 1px 2px var(--clr-dark-gray);
 
     opacity: 0.9;
 
     cursor: pointer;
+}
+.clicked {
+    color: black;
 }
 .hide {
     display: none;

@@ -43,11 +43,15 @@ var toggleViewControl = L.Control.extend({
     let container = L.DomUtil.create('div', 'toggle-view-control');
     
     let mapButton = L.DomUtil.create('button', 'view-button', container);
-
+  
     mapButton.innerHTML = 'Map';
 
+    mapButton.classList.add("clicked");
+
     L.DomEvent.on(mapButton, 'click', () => {
-    setBaseMap(map, "map");
+      satelliteButton.classList.remove("clicked");
+      mapButton.classList.add("clicked");
+      setBaseMap(map, "map");
     });
     
     let satelliteButton = L.DomUtil.create('button', 'view-button', container);
@@ -55,7 +59,9 @@ var toggleViewControl = L.Control.extend({
     satelliteButton.innerHTML = 'Satellite';
 
     L.DomEvent.on(satelliteButton, 'click', () => {
-    setBaseMap(map, "satellite");
+      mapButton.classList.remove("clicked");
+      satelliteButton.classList.add("clicked");
+      setBaseMap(map, "satellite");
     });
 
     return container;
@@ -64,7 +70,7 @@ var toggleViewControl = L.Control.extend({
 
 map.addControl(new toggleViewControl());
 
-let marker;
+let marker = L.marker([lat, lng], {icon:icon}).addTo(map);;
 
 form.addEventListener("submit", function(event) {
   event.preventDefault();
@@ -97,6 +103,8 @@ form.addEventListener("submit", function(event) {
           duration: 2,
           easeLinearity: 0.25
         });
+
+        map.removeLayer(marker);
 
         marker = L.marker([lat, lng], {icon:icon}).addTo(map);
 
