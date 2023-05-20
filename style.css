@@ -62,6 +62,8 @@ input {
     padding-left: 25px;
 }
 input::placeholder {
+    color: var(--clr-dark-gray);
+
     font-weight: var(--fw-500);
 }
 input:focus {
@@ -83,6 +85,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 }
 #result {
     position: absolute;
@@ -160,6 +164,35 @@ ul {
     height: 60%;
 
     z-index: 1;
+}
+.leaflet-top {
+    top: 85% !important
+}
+.leaflet-control {
+    transform: translate(0, -50%);
+}
+.toggle-view-control {
+    width: 75px;
+}
+.view-button {
+    width: 100%;
+    height: 30px;
+
+    font-family: var(--ff);
+    font-weight: var(--fw-400);
+
+    padding: 0;
+
+    color: var(--clr-dark-gray);
+    background-color: white;
+
+    border-radius: 0;
+
+    box-shadow: 0 1px 2px var(--clr-dark-gray);
+
+    opacity: 0.9;
+
+    cursor: pointer;
 }
 .hide {
     display: none;

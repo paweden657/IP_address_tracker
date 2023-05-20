@@ -18,8 +18,51 @@ let lng = 12.4964;
 
 let map = L.map("map", {zoomControl: false}).setView([lat, lng], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data &copy; OpenStreetMap contributors'
-}).addTo(map);
+  attribution: 'Map data &copy; OpenStreetMap contributors'}).addTo(map);
+
+function setBaseMap(map, baseMap) {
+  
+  map.eachLayer((layer) => {
+    if (layer instanceof L.TileLayer) {
+      map.removeLayer(layer);
+    }
+  });
+
+  if (baseMap === "map") {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: 'Map data &copy; OpenStreetMap contributors'}).addTo(map);
+    } else {
+      L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                  attribution: 'Map data &copy; <a href="https://www.google.com/maps">Google Maps</a>',
+                  maxZoom: 20}).addTo(map);
+    }
+}
+
+var toggleViewControl = L.Control.extend({
+  onAdd: function(map) {
+    let container = L.DomUtil.create('div', 'toggle-view-control');
+    
+    let mapButton = L.DomUtil.create('button', 'view-button', container);
+
+    mapButton.innerHTML = 'Map';
+
+    L.DomEvent.on(mapButton, 'click', () => {
+    setBaseMap(map, "map");
+    });
+    
+    let satelliteButton = L.DomUtil.create('button', 'view-button', container);
+
+    satelliteButton.innerHTML = 'Satellite';
+
+    L.DomEvent.on(satelliteButton, 'click', () => {
+    setBaseMap(map, "satellite");
+    });
+
+    return container;
+  }
+});
+
+map.addControl(new toggleViewControl());
 
 let marker;
 
