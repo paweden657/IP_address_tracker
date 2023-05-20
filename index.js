@@ -30,9 +30,13 @@ form.addEventListener("submit", function(event) {
     });
 })
 
-let map = L.map("map").setView([51.505, -0.09], 13);
+let icon = L.icon ( {
+  iconUrl: "images/icon-location.svg"
+});
+
+let map = L.map("map", {zoomControl: false}).setView([51.505, -0.09], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data &copy; OpenStreetMap contributors'
 }).addTo(map);
 
-let marker = L.marker([51.5, -0.09]).addTo(map);
+let marker = L.marker([51.5, -0.09], {icon:icon}).addTo(map);
