@@ -21,7 +21,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data &copy; OpenStreetMap contributors'}).addTo(map);
 
 function setBaseMap(map, baseMap) {
-  
+
   map.eachLayer((layer) => {
     if (layer instanceof L.TileLayer) {
       map.removeLayer(layer);
@@ -93,8 +93,18 @@ form.addEventListener("submit", function(event) {
         lat = data.location.lat;
         lng = data.location.lng;
 
-        map.setView([lat, lng], 13);
+        map.flyTo([lat, lng], 10, {
+          duration: 2,
+          easeLinearity: 0.25
+        });
+
         marker = L.marker([lat, lng], {icon:icon}).addTo(map);
+
+        for(let i = 1; i <= 3; i++) {
+          setTimeout(() => {
+            map.flyTo([lat, lng], (10 + 2 * i));
+          }, 1500 * (i + 1));
+        }
     })
     .catch(error => {
       console.error("Error occured", error);
