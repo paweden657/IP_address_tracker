@@ -12,20 +12,24 @@ app.use(cors());
 
 app.get('/', (req, res) => {
     try {
-        let IpAddress = req.query.param;
-        if(ip.Address4.isValid(IpAddress) || ip.Address6.isValid(IpAddress)) {
-          const apiKey = process.env.API_KEY;
-          axios.get("https://geo.ipify.org/api/v2/country?apiKey=" + apiKey + "&ipAddress=" + IpAddress)
+        let param = req.query.param;
+        let search = "&ipAddress=";
+        
+        const apiKey = process.env.API_KEY;
+
+        if(ip.Address4.isValid(param) || ip.Address6.isValid(param)) {
+          search = "&ipAddress=";
+        } else {
+          search = "&domain=";
+        }
+        axios.get("https://geo.ipify.org/api/v2/country,city?apiKey=" + apiKey + search + param)
           .then(response => {
             res.send(response.data);
           })
           .catch(error => {
             console.error(error);
-            res.status(500).send('{"500":"Internal Server Error"}');
+            res.status(400).json({message: error.message});
           });
-        } else {
-          res.status(400).send('{"400":"Bad Request"}');
-        }
     } catch (error) {
       console.error(error);
       res.status(500).send('{"500":"Internal Server Error"}');

@@ -60,11 +60,13 @@ input {
     border-width: 0;
 
     padding-left: 25px;
-
 }
 input::placeholder {
     font-weight: var(--fw-500);
 }
+input:focus {
+    outline: none;
+} 
 input:focus::placeholder {
     color: transparent;
 }
@@ -81,7 +83,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 #result {
     position: absolute;
