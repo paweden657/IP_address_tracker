@@ -17,11 +17,10 @@ app.get('/', (req, res) => {
         
         const apiKey = process.env.API_KEY;
 
-        if(ip.Address4.isValid(param) || ip.Address6.isValid(param)) {
-          search = "&ipAddress=";
-        } else {
-          search = "&domain=";
+        if(!(ip.Address4.isValid(param) || ip.Address6.isValid(param))) {
+            search = "&domain=";
         }
+
         axios.get("https://geo.ipify.org/api/v2/country,city?apiKey=" + apiKey + search + param)
           .then(response => {
             res.send(response.data);

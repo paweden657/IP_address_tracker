@@ -10,7 +10,9 @@ let timeZoneP = document.getElementById("timezone");
 let ispP = document.getElementById("isp");
 
 let icon = L.icon ( {
-  iconUrl: "images/icon-location.svg"
+  iconUrl: "images/icon-location.svg",
+  iconSize: [46, 56],
+  iconAnchor: [23, 56]
 });
 
 let lat = 41.9028;
@@ -20,7 +22,7 @@ let map = L.map("map", {zoomControl: false}).setView([lat, lng], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data &copy; OpenStreetMap contributors'}).addTo(map);
 
-let marker = L.marker([lat, lng], {icon:icon}).addTo(map);;
+let marker = L.marker([lat, lng], {icon:icon}).addTo(map);
 
 function setBaseMap(map, baseMap) {
 
