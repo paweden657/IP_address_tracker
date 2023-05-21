@@ -20,6 +20,8 @@ let map = L.map("map", {zoomControl: false}).setView([lat, lng], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data &copy; OpenStreetMap contributors'}).addTo(map);
 
+let marker = L.marker([lat, lng], {icon:icon}).addTo(map);;
+
 function setBaseMap(map, baseMap) {
 
   map.eachLayer((layer) => {
@@ -33,8 +35,7 @@ function setBaseMap(map, baseMap) {
                   attribution: 'Map data &copy; OpenStreetMap contributors'}).addTo(map);
     } else {
       L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                  attribution: 'Map data &copy; <a href="https://www.google.com/maps">Google Maps</a>',
-                  maxZoom: 20}).addTo(map);
+                  attribution: 'Map data &copy; <a href="https://www.google.com/maps">Google Maps</a>'}).addTo(map);
     }
 }
 
@@ -69,8 +70,6 @@ var toggleViewControl = L.Control.extend({
 });
 
 map.addControl(new toggleViewControl());
-
-let marker = L.marker([lat, lng], {icon:icon}).addTo(map);;
 
 form.addEventListener("submit", function(event) {
   event.preventDefault();
@@ -110,7 +109,7 @@ form.addEventListener("submit", function(event) {
 
         for(let i = 1; i <= 3; i++) {
           setTimeout(() => {
-            map.flyTo([lat, lng], (10 + 2 * i));
+            map.setZoom(10 + 2 * i);
           }, 1500 * (i + 1));
         }
     })
