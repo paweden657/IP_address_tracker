@@ -17,6 +17,12 @@ app.get('/', (req, res) => {
         
         const apiKey = process.env.API_KEY;
 
+        /*if(param === "") {
+          param = req.ip
+        } else if(!(ip.Address4.isValid(param) || ip.Address6.isValid(param))) {
+          search = "&domain=";
+        }*/
+
         if(!(ip.Address4.isValid(param) || ip.Address6.isValid(param))) {
             search = "&domain=";
         }
