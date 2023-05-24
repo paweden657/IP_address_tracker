@@ -1,4 +1,6 @@
 :root {
+    --clr-primary-soft-red: hsl(0, 94%, 66%);
+
     --clr-very-dark-gray: hsl(0, 0%, 17%);
     --clr-dark-gray: hsl(0, 0%, 59%);
 
@@ -94,7 +96,7 @@ input:focus::placeholder {
 #btn:hover {
     background-color: var(--clr-very-dark-gray);
 }
-#result {
+#result, #not-valid-data {
     position: absolute;
 
     z-index: 2;
@@ -115,6 +117,9 @@ input:focus::placeholder {
 
     border-radius: 20px;
 }
+#not-valid-data {
+    max-width: 340px;
+}
 ul {
     list-style-type: none;
 
@@ -134,6 +139,10 @@ li > p {
     font-weight: var(--fw-700);
 
     margin: 10px 0;
+}
+#not-valid-data > p {
+    color: var(--clr-primary-soft-red);
+    font-size: 1.3rem;
 }
 #ip-address, #location, #timezone, #isp {
     color: black;

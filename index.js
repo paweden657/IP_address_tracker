@@ -4,6 +4,7 @@ const form = document.getElementById("form");
 const input = document.getElementById("input");
 
 let result = document.getElementById("result");
+let notValidData = document.getElementById("not-valid-data");
 let ipAddressP = document.getElementById("ip-address");
 let locationP = document.getElementById("location");
 let timeZoneP = document.getElementById("timezone");
@@ -80,10 +81,15 @@ form.addEventListener("submit", function(event) {
   fetch(`${url}?param=${encodeURIComponent(IpAddress)}`)
     .then(response => {
       if(response.ok) {
+        notValidData.classList.add("hide");
         return response.json();
       }
       else {
         console.log(response.status + ": " + response.statusText);
+        result.classList.add("hide");
+        notValidData.classList.remove("hide");
+        map.removeLayer(marker);
+        
         throw new Error("Error occured");
       }
     })
